@@ -1,0 +1,313 @@
+/* ນຳເຂົ້າຟ້ອນ Noto Sans Lao */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@300;400;700&family=Poppins:wght@300;500;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans Lao', sans-serif;
+}
+
+body {
+    background-color: rgb(163, 203, 217);
+    color: #333;
+}
+
+marquee {
+    display: block !important;
+    width: 100% !important;
+    font-size: 18px;
+    font-weight: 700;
+}  
+
+header {
+    background-color: #43a4e0;
+    color: white;
+    text-align: center;
+    max-width: 1170px; 
+    margin: 20px auto 40px; 
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* คอนเทนเนอร์หลัก: ปรับให้เรียงจากบนลงล่าง */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px 40px;
+}
+
+/* ส่วนแสดงสินค้าด้านบน: ใช้ CSS Grid จัดเรียงแถวละ 2-3 ชิ้นอัตโนมัติ */
+.products-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+/* สไตล์การ์ดสินค้า */
+.product-card {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.08) rotate(1deg);
+    filter: brightness(1.05);
+}
+
+.product-card h3 {
+    margin-top: 18px;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.product-card h3 span {
+    display: block;
+    margin-top: 8px;
+    font-size: 16px;
+    color: #666;
+    font-weight: normal;
+}
+
+.product-card p {
+    color: #e53935;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.btn-add {
+    background-color: #43a4e0;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.btn-add:hover {
+    background-color: #2d8cc7;
+    transform: scale(1.03);
+}
+
+/* ส่วนตะกร้าสินค้าด้านล่างสุด: ปรับหน้ากว้าง 100% */
+.cart-section {
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    height: auto;
+}
+
+/* จัดส่วนสรุปสินค้าและฟอร์มข้อมูลให้อยู่ซ้าย-ขวาคู่กัน */
+.cart-layout {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+}
+
+.cart-left, .cart-right {
+    flex: 1;
+    min-width: 280px;
+}
+
+.cart-section h2 {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #43a4e0;
+    padding-bottom: 5px;
+    font-size: 1.3rem;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    flex-wrap: nowrap;
+}
+
+.btn-remove {
+    background-color: #e53935;
+    color: white;
+    border: none;
+    min-width: 90px;
+    height: 35px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.btn-remove:hover {
+    background-color: #c62828;
+    transform: scale(1.05);
+}
+
+.cart-summary {
+    margin: 20px 0;
+}
+
+.cart-summary p, .cart-summary h3 {
+    margin-bottom: 8px;
+}
+
+.coupon-area {
+    display: flex;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.coupon-area input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+.coupon-area button {
+    background-color: #0af24b;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.coupon-area button:hover {
+    background-color: #08c93d;
+}
+
+/* ฟอร์มข้อมูลลูกค้า */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+.btn-checkout {
+    width: 100%;
+    background-color: #0af24b;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.btn-checkout:hover {
+    background-color: #08c93d;
+    transform: scale(1.01);
+}
+
+/* สไตล์หน้าใบเสร็จ */
+.receipt-body {
+    background-color: #fff;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.receipt-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.receipt-table th, .receipt-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.btn-print {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+@media print {
+    .btn-print {
+        display: none;
+    }
+}
+
+/* ระบบ Responsive รองรับมือถือ */
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+    }
+
+    .cart-layout {
+        flex-direction: column;
+        gap: 25px;
+    }
+    
+    .product-card img {
+        height: 160px;
+    }
+}

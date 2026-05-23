@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ຮ້ານຂາຍນ້ຳໝາກພ້າວນ້ຳຫອມ - Simple POS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div style="width: 100%; background: #43a4e0; color: white; padding: 12px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();" style="font-size: 18px; font-weight: 700; display: block; font-family: 'Noto Sans Lao', sans-serif;">
+ຮ້ານຂາຍນ້ຳໝາກພ້າວນ້ຳຫອມຂອງພວກເຮົາຍິນດີຕ້ອນຮັບທຸກໆທ່ານ ຊ້ວງນີ້ມີໂປຣໂມຊັ້ນ ສ່ວນຫຼຸດ 5%  Welcome to our Aromatic Coconut Juice Shop! Enjoy a special 5% discount during our promotion period.
+        </marquee>
+    </div>
+
+    <header>
+        <h1>ຮ້ານຂາຍນ້ຳໝາກພ້າວນ້ຳ ຫອມ (Aromatic Coconut Water Shop)</h1>
+    </header>
+
+    <div class="container">
+        <main class="products-grid" id="products-container"></main>
+
+        <section class="cart-section">
+            <div class="cart-layout">
+                
+                <div class="cart-left">
+                    <h2>ລາຍການສິນຄ້າ</h2>
+                    <div id="cart-items"></div>
+
+                    <div class="cart-summary">
+                        <p>ຈຳນວນທັງໝົດ: <span id="total-count">0</span> ອັນ</p>
+                        <div class="coupon-area">
+                            <input type="text" id="coupon-code-input" placeholder="ໃສ່ລະຫັດສ່ວນຫຼຸດ">
+                            <button type="button" onclick="applyDiscount(event)">ໃຊ້ງານ</button>
+                        </div>
+                        <p id="discount-msg" style="font-size: 0.9rem;"></p>
+                        <h3>ຍອດລວມ: <span id="total-price">0</span> ກີบ</h3>
+                    </div>
+                </div>
+
+                <div class="cart-right">
+                    <h2>ຂໍ້ມູນລູກຄ້າ</h2>
+                    <form id="checkout-form" onsubmit="handleCheckout(event)">
+                        <div class="form-group">
+                            <label for="customer-name">ຊື່ລູກຄ້າ:</label>
+                            <input type="text" id="customer-name" required placeholder="ກະລຸນາປ້ອນຊື່">
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-tel">ເບີໂທລະສັບ:</label>
+                            <input type="tel" id="customer-tel" required placeholder="ກະລຸນາປ້ອນເບີໂທ">
+                        </div>
+                        <button type="submit" class="btn-checkout">ຢືນຢັນການຊື້ ແລະ ອອກໃບບິນ</button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

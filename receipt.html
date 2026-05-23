@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ໃບບິນຮັບເງິນ - Receipt</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #abd0e7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .receipt-body {
+            background-color: #ffffff;
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 35px;
+            border: none;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .success-icon-container {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .success-icon {
+            width: 55px;
+            height: 55px;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .receipt-body h2 {
+            color: #5c59e9;
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .receipt-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+        .receipt-table th {
+            border-bottom: 2px solid #f0f0f0;
+            color: #555;
+            padding: 10px 5px;
+        }
+        .receipt-table td {
+            padding: 12px 5px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+
+        #receipt-summary h3 {
+            color: #5c59e9;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .qr-container {
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px; /* เพิ่มพื้นที่ด้านในกล่อง */
+            border: 1px dashed #5c59e9;
+            border-radius: 16px;
+            background-color: #fafafa;
+        }
+
+        /* ตั้งค่าสไตล์รูปภาพ QR Code ให้ขยายเต็มบล็อก */
+        .qr-container img {
+            width: 100% !important;        /* ขยายรูปภาพ (รวมขอบแดง) เต็มความกว้างของบล็อก */
+            max-width: 340px !important;   /* จำกัดขนาดสูงสุดไว้เพื่อให้สวยงามและสแกนง่าย */
+            height: auto !important;       /* รักษาอัตราส่วนสี่เหลี่ยมจัตุรัส ภาพไม่เบี้ยวแน่นอน */
+            object-fit: contain;
+            display: block;
+            margin: 15px auto;             /* จัดกึ่งกลางและเว้นระยะบนล่าง */
+            border-radius: 8px;            /* ลบมุมภาพให้ดูนุ่มนวลเข้ากับกล่อง */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* เพิ่มเงาจางๆ ให้รูปภาพดูเด่นขึ้น */
+        }
+
+        .qr-text {
+            font-size: 0.95rem;
+            color: #5c59e9;
+            font-weight: bold;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-purple { background-color: #5c59e9; color: white; }
+        .btn-purple:hover { background-color: #4a47d1; }
+
+        .btn-green { background-color: #4caf50; color: white; }
+        .btn-green:hover { background-color: #3d8b40; }
+
+        .btn-gray { background-color: #f0f2f5; color: #4b5563; text-decoration: none; }
+        .btn-gray:hover { background-color: #e4e7eb; }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .receipt-body { box-shadow: none; padding: 0; max-width: 100%; }
+            .btn-group, .qr-container { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="receipt-body">
+        <div class="success-icon-container">
+            <div class="success-icon">✓</div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 25px;">
+            <h2>ໃບບິນຮັບເງິນ</h2>
+            <p style="color: #666; font-size: 0.95rem;">ຮ້ານຂາຍນ້ຳໝາກພ້າວນ້ຳຫອມ Aromatic Coconut Water Shop </p>
+        </div>
+
+        <div id="receipt-info"></div>
+
+        <table class="receipt-table">
+            <thead>
+                <tr>
+                    <th style="text-align: left;">ລາຍການ</th>
+                    <th style="text-align: center;">ຈຳນວນ</th>
+                    <th style="text-align: right;">ລວມ (ກີບ)</th>
+                </tr>
+            </thead>
+            <tbody id="receipt-items"></tbody>
+        </table>
+
+        <div style="text-align: right; margin-top: 20px;" id="receipt-summary"></div>
+
+        <div class="qr-container" id="qr-section">
+            <p style="font-size: 0.9rem; color: #555;">🔍 ສະແກນ QR Code ເພື່ອຊຳລະເງິນ</p>
+            <img id="payment-qr" src="myqr.png" alt="Payment QR Code">
+            <p class="qr-text">ຍອດເງິນທີ່ຕ້ອງໂອນ: <span id="qr-amount">0</span> ກີບ</p>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-action btn-purple" onclick="window.print()">
+                🖨 ພິມໃບບິນ
+            </button>
+            <button class="btn-action btn-green" onclick="window.print()">
+                📥 ບັນທຶກເປັນ PDF
+            </button>
+            <a href="index.html" class="btn-action btn-gray">
+                ← ກັບຄືນໜ້າຫຼັກ
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const order = JSON.parse(localStorage.getItem('currentOrder'));
+
+        if (order) {
+            document.getElementById('receipt-info').innerHTML = `
+                <p><strong>ວັນທີ:</strong> ${order.date}</p>
+                <p><strong>ຊື່ລູกຄ້າ:</strong> ${order.customerName}</p>
+                <p><strong>ເບີໂທ:</strong> ${order.customerTel}</p>
+            `;
+
+            const itemsContainer = document.getElementById('receipt-items');
+            order.items.forEach(item => {
+                itemsContainer.innerHTML += `
+                    <tr>
+                        <td style="text-align: left;">${item.name}</td>
+                        <td style="text-align: center;">${item.quantity}</td>
+                        <td style="text-align: right;">${(item.price * item.quantity).toLocaleString()}</td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById('receipt-summary').innerHTML = `
+                <p style="color: #666;">ສ່ວນຫຼຸດ: ${order.discount}%</p>
+                <h3>ລວມ: ${order.total.toLocaleString()} ກີບ</h3>
+            `;
+
+            document.getElementById('qr-amount').innerText = order.total.toLocaleString();
+            document.getElementById('payment-qr').src = "qr.png.jpeg";
+
+        } else {
+            document.body.innerHTML = "<div class='receipt-body' style='text-align:center;'><h3>ບໍ່ພົບຂໍ້ມູນໃບບິນ</h3></div>";
+        }
+    </script>
+</body>
+</html>
